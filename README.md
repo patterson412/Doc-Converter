@@ -18,7 +18,7 @@ Multiple types of file formats can be input to convert to pdf. That is it can co
 - On windows install the LibreOffice software from the site normally. Then make sure the "soffice.exe" executable is present, that should exactly be path "C:\\Program Files\\LibreOffice\\program\\soffice.exe".
 (THIS HAS NOT BEEN TESTED ON WINDOWS).
 
-- open new terminal within vscode and cd into the proper directory the File-Converter and then type < npm run build-css > to run script to make Tailwind changes effective and to watch for future changes automatically, and then open another terminal and type < nodemon TestServer.js > to start the server(by using nodemon you dont have to type the command to restart the server each time after a change, it automatically does it when the changes are saved so you can directly refresh the browser to observe changes) or else usual node command to start the server would work as well. afterwards go to browser and type http://localhost:3000/ and the homepage that is uploadDoc.ejs should render.
+- open new terminal within vscode/terminal and cd into the proper directory the Doc-Converter and then type < npm run start >. Afterwards go to browser and type http://localhost:3000/ and the homepage that is uploadDoc.ejs should render.
 
 - NOTE: the < > arrow symbols are used above to mention terminal commands. Ignore them when running the commands.
 
@@ -39,8 +39,6 @@ Multiple types of file formats can be input to convert to pdf. That is it can co
 - Proper Styling for the downloadDoc.ejs file can be done, and if the conversion was unsuccessfull for that styling needs to be done as well. Also overall styling can be improved in the coming days.
 
 - The animation used in the homepage was taken from a youtube video I reffered for an individual project of mine, which i cant find the video to mention as reference.
-
-- On Linux we need to install the LibreOffice software and find the path the "soffice" package is located and then update the pathToOffice variable code to test it.
 
 - Tried Integrating Socket.io for real time updates between client and server. (Could not achieve this with current knowledge, will be integrating with time).
 

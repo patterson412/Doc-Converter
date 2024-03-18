@@ -36,7 +36,7 @@
                 <label for="document-upload-area" class="block text-sm font-medium leading-6 text-gray-900">Document
                     Upload</label>
 
-                <div class="mt-2 flex gap-4 justify-center">
+                <div class="mt-2 flex gap-4 justify-center items-center flex-col">
                     <p class="text-sm self-center">Convert</p>
                     <select id="convert-from" name="convert-from" required
                         class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
@@ -53,7 +53,8 @@
                     </select>
                 </div>
 
-                <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+                <div id="drop-area"
+                    class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
                     <div>
                         <svg class="mx-auto" xmlns="http://www.w3.org/2000/svg"
                             xmlns:xlink="http://www.w3.org/1999/xlink" width="40" zoomAndPan="magnify"
@@ -110,13 +111,60 @@
 
             if (fileInput.files.length > 0) {
                 const fileName = fileInput.files[0].name.toLowerCase();
-                
+
                 fileNameElement.textContent = fileName;
             } else {
                 // Reset the text if no file is selected
                 fileNameElement.textContent = '';
             }
         });
+
+
+        // Drag and drop functionality
+        const dropArea = document.getElementById('drop-area');
+
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, preventDefaults);
+            document.body.addEventListener(eventName, preventDefaults);
+        });
+
+        
+
+        dropArea.addEventListener('drop', handleDrop);
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+
+            handleFiles(files);
+        }
+
+        function handleFiles(files) {
+            // Display the selected file name
+            const fileNameElement = document.getElementById('doc-name');
+
+            if (files.length > 0) {
+                const fileName = files[0].name.toLowerCase();
+                fileNameElement.textContent = fileName;
+
+                //Select dropped file
+                const fileInput = document.getElementById('doc-upload');
+                fileInput.files = files;
+
+                // Show the buttons
+                document.getElementById('buttons').classList.remove("hidden");
+                document.getElementById('buttons').classList.add("flex");
+            } else {
+                // Reset the text if no file is selected
+                fileNameElement.textContent = '';
+            }
+        }
 
         //Animation taken from a youtube video which i cant remember.
 
